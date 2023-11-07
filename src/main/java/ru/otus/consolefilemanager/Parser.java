@@ -6,6 +6,7 @@ import java.io.IOException;
 public class Parser {
     private final Executor executor;
     private final String unknownCommand = "Неизвестная команда";
+
     public Parser(Executor executor) {
         this.executor = executor;
     }
@@ -21,16 +22,15 @@ public class Parser {
                     else System.out.println(unknownCommand);
                 }
                 case ("cd") -> {
-                    if (commArgs.length!= 2) System.out.println(unknownCommand);
-                    else{
+                    if (commArgs.length != 2) System.out.println(unknownCommand);
+                    else {
                         if (commArgs[1].equals("..")) {
                             executor.cdUp();
-                        }
-                        else executor.cd(commArgs[1]);
+                        } else executor.cd(commArgs[1]);
                     }
                 }
                 case ("mkdir") -> {
-                    if (commArgs.length!= 2) System.out.println(unknownCommand);
+                    if (commArgs.length != 2) System.out.println(unknownCommand);
                     else executor.mkdir(commArgs[1]);
                 }
                 case ("exit") -> System.exit(1);
@@ -38,7 +38,8 @@ public class Parser {
             }
         }
     }
-    public Executor getExecutor(){
+
+    public Executor getExecutor() {
         return executor;
     }
 
