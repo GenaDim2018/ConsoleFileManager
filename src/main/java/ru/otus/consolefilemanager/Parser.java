@@ -1,9 +1,7 @@
-package ru.otus.consoleFileManager;
-
-import static ru.otus.consoleFileManager.Commands.*;
+package ru.otus.consolefilemanager;
 
 public class Parser {
-    Executor executor;
+    private final Executor executor;
     public Parser(Executor executor){
         this.executor = executor;
     }

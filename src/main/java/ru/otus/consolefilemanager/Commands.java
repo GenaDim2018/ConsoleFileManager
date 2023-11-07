@@ -1,4 +1,4 @@
-package ru.otus.consoleFileManager;
+package ru.otus.consolefilemanager;
 
 public enum Commands {
     LS("ls"),
