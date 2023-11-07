@@ -7,22 +7,28 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Executor {
+
     private File filePath;
 
     public Executor(String directory) throws IOException {
         filePath = new File(directory);
         if (checkDirectory()) System.out.println(filePath.getCanonicalFile());
         else System.out.println("Некорректный путь");
+
     }
 
     public void ls() {
         String[] strList = filePath.list();
+
         if (strList.length == 0) System.out.println("Пустая директория");
+
     }
 
     public void lsInfo() {
         File[] files = filePath.listFiles();
+
         if (files.length == 0) System.out.println("Пустая директория");
+
         else {
             for (File file : files) {
                 Date date = new Date(file.lastModified());
@@ -30,6 +36,7 @@ public class Executor {
             }
         }
     }
+
 
     public void cd(String directory) throws IOException {
         File newPath = new File(filePath.getPath() + "/" + directory);
@@ -63,4 +70,5 @@ public class Executor {
     public boolean checkDirectory(){
         return filePath.exists();
     }
+
 }
