@@ -14,15 +14,19 @@ public class Parser {
     public void parse(String command) throws IOException {
         if (command == null || command.isEmpty()) System.out.println("Введите команду");
         else {
-            String[] commArgs = command.split(" ");
+            String[] commArgs = new String[2];
+            if (command.contains(" ")) {
+                commArgs[0] = command.substring(0, command.indexOf(" "));
+                commArgs[1] = command.substring(command.indexOf(" ")+1);
+            } else commArgs[0] = command;
             switch (commArgs[0]) {
                 case ("ls") -> {
-                    if (commArgs.length == 1) executor.ls();
-                    else if (commArgs[1].equals("-l") && commArgs.length == 2) executor.lsInfo();
+                    if (commArgs[1] == null) executor.ls();
+                    else if (commArgs[1].equals("-l")) executor.lsInfo();
                     else System.out.println(unknownCommand);
                 }
                 case ("cd") -> {
-                    if (commArgs.length != 2) System.out.println(unknownCommand);
+                    if (commArgs[1] == null) System.out.println(unknownCommand);
                     else {
                         if (commArgs[1].equals("..")) {
                             executor.cdUp();
@@ -30,14 +34,17 @@ public class Parser {
                     }
                 }
                 case ("mkdir") -> {
-                    if (commArgs.length != 2) System.out.println(unknownCommand);
+                    if (commArgs[1] == null) System.out.println(unknownCommand);
                     else executor.mkdir(commArgs[1]);
                 }
-                case ("rm") ->{
-                    if (commArgs.length != 2) System.out.println(unknownCommand);
+                case ("rm") -> {
+                    if (commArgs[1] == null) System.out.println(unknownCommand);
                     else executor.rm(commArgs[1]);
                 }
-                case ("exit") -> System.exit(1);
+                case ("exit") -> {
+                    if (commArgs[1] == null) System.exit(1);
+                    else System.out.println(unknownCommand);
+                }
                 default -> System.out.println(unknownCommand);
             }
         }
