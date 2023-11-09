@@ -5,13 +5,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import static ru.otus.consolefilemanager.Manager.readLine;
+
 public class Executor {
 
     private File filePath;
 
+    public File getFilePath() {
+        return filePath;
+    }
+
+
     public Executor(String directory) throws IOException {
         filePath = new File(directory);
-        if (checkDirectory()) System.out.println(filePath.getCanonicalFile());
+        if (checkDirectory(filePath)) System.out.println(filePath.getCanonicalFile());
         else System.out.println("Некорректный путь");
 
     }
@@ -65,8 +72,37 @@ public class Executor {
         }
     }
 
-    public boolean checkDirectory() {
-        return filePath.exists();
+    public void rm(String name) {
+        File rmFile = new File(filePath.getPath() + "/" + name);
+        if (checkDirectory(rmFile)) {
+            if (rmFile.isFile()) {
+                if (rmFile.delete()) System.out.println(name + " успешно удален");
+                else System.out.println("Не удалось удалить файл, возможно сейчас он открыт");
+            } else {
+                if (rmFile.delete()) System.out.println("Директория успешно удалена");
+                else {
+                    System.out.println("Директория не пуста, удалить? (Да/Нет)");
+                    if (readLine().equals("Да")) {
+                        if (deleteDirectory(rmFile)) System.out.println("Директория успешно удалена");
+                        else System.out.println("Не удалось полностью удалить директорию, возможно сейчас открыт файл из нее");
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean deleteDirectory(File directory) {
+        File[] contents = directory.listFiles();
+        if (contents != null) {
+            for (File file : contents) {
+                deleteDirectory(file);
+            }
+        }
+        return directory.delete();
+    }
+
+    public boolean checkDirectory(File dir) {
+        return dir.exists();
     }
 
 }

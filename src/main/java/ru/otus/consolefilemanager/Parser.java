@@ -33,6 +33,10 @@ public class Parser {
                     if (commArgs.length != 2) System.out.println(unknownCommand);
                     else executor.mkdir(commArgs[1]);
                 }
+                case ("rm") ->{
+                    if (commArgs.length != 2) System.out.println(unknownCommand);
+                    else executor.rm(commArgs[1]);
+                }
                 case ("exit") -> System.exit(1);
                 default -> System.out.println(unknownCommand);
             }
