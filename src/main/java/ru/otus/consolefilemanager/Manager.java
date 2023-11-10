@@ -4,20 +4,26 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Manager {
+    private static Scanner sc = new Scanner(System.in);
+
     public static void run() {
-        Scanner sc = new Scanner(System.in);
         try {
             Parser parser;
-            do {
-                System.out.println("Укажите директорию");
-                parser = new Parser(new Executor(sc.nextLine()));
-            } while (!parser.getExecutor().checkDirectory());
             while (true) {
-                parser.parse(sc.nextLine());
+                System.out.println("Укажите директорию");
+                String dir = readLine();
+                parser = new Parser(new Executor(dir));
+                if (parser.getExecutor().checkDirectory(parser.getExecutor().getFilePath())) break;
+            }
+            while (true) {
+                parser.parse(readLine());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ;
+    }
+
+    public static String readLine() {
+        return sc.nextLine();
     }
 }
