@@ -70,10 +70,7 @@ public class Parser {
                         executor.finfo(commArgs[1]);
                     }
                 }
-                case ("find") -> {
-                    if (commArgs[1] == null) System.out.println(unknownCommand);
-                }
-                //C:\Users\genad\Desktop\java
+
                 case ("help") -> {
                     if (commArgs[1] == null) {
                         System.out.println("ls – распечатать список файлов текущего каталога");

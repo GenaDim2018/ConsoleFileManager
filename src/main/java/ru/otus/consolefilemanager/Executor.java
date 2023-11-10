@@ -131,7 +131,7 @@ public class Executor {
                 System.out.println("Не удалось скопировать");
                 e.printStackTrace();
             }
-        } else System.out.println("Некорректное имя файла/директории или путь");
+        } else System.out.println("Некорректное имя файла или путь");
     }
 
     public void finfo(String name) {
