@@ -1,15 +1,15 @@
 package ru.otus.consolefilemanager;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Manager {
     private static Scanner sc = new Scanner(System.in);
+
     public static void run() {
         try {
             Parser parser;
-            while (true){
+            while (true) {
                 System.out.println("Укажите директорию");
                 String dir = readLine();
                 parser = new Parser(new Executor(dir));
@@ -22,7 +22,8 @@ public class Manager {
             e.printStackTrace();
         }
     }
-    public static String readLine(){
+
+    public static String readLine() {
         return sc.nextLine();
     }
 }

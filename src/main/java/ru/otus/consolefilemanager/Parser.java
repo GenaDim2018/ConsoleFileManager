@@ -70,9 +70,12 @@ public class Parser {
                         executor.finfo(commArgs[1]);
                     }
                 }
+                case ("find") -> {
+                    if (commArgs[1] == null) System.out.println(unknownCommand);
+                }
                 //C:\Users\genad\Desktop\java
                 case ("help") -> {
-                    if (commArgs[1] == null){
+                    if (commArgs[1] == null) {
                         System.out.println("ls – распечатать список файлов текущего каталога");
                         System.out.println("ls -l – распечатать список файлов текущего каталога c информаций о файлах");
                         System.out.println("cd [имя директории] – переход в указанную поддиректорию");
@@ -83,10 +86,8 @@ public class Parser {
                         System.out.println("cp [имя файла] [путь копирования] – скопировать файл");
                         System.out.println("finfo [имя файла] – получить подробную информацию о файле");
                         System.out.println("help – вывод в консоль всех поддерживаемых команд");
-                        System.out.println("find [filename] – найти файл с указанным именем в текущем каталоге или любом его подкаталоге");
                         System.out.println("exit – завершить работу");
-                    }
-                    else System.out.println(unknownCommand);
+                    } else System.out.println(unknownCommand);
                 }
                 case ("exit") -> {
                     if (commArgs[1] == null) System.exit(1);
